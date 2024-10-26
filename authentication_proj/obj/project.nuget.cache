@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "KdHKMATH/VURRWwhZQ9lkiuNo9gNb+6iMX1Se5mqI3V0sD3qdeY+kWLsiFVis7hqpoqA4DLx0ybheO61KGJVGg==",
+  "success": true,
+  "projectFilePath": "C:\\DEV\\DOTNET\\Iquirium_projeto_backend_dotnet\\authentication_proj\\authentication_proj.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\thale\\.nuget\\packages\\microsoft.extensions.apidescription.server\\6.0.5\\microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",
+    "C:\\Users\\thale\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\thale\\.nuget\\packages\\swashbuckle.aspnetcore\\6.4.0\\swashbuckle.aspnetcore.6.4.0.nupkg.sha512",
+    "C:\\Users\\thale\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.4.0\\swashbuckle.aspnetcore.swagger.6.4.0.nupkg.sha512",
+    "C:\\Users\\thale\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.4.0\\swashbuckle.aspnetcore.swaggergen.6.4.0.nupkg.sha512",
+    "C:\\Users\\thale\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.4.0\\swashbuckle.aspnetcore.swaggerui.6.4.0.nupkg.sha512"
+  ],
+  "logs": []
+}
