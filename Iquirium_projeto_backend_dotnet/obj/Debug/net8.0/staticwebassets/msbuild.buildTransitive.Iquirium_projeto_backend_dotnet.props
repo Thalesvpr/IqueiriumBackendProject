@@ -1,3 +1,0 @@
-﻿<Project>
-  <Import Project="..\buildMultiTargeting\Iquirium_projeto_backend_dotnet.props" />
-</Project>
