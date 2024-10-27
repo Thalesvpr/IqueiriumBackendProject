@@ -1,0 +1,58 @@
+# Arquivos de log
+*.log
+logs/
+*.tlog
+*.log
+
+# Pastas de build
+bin/
+obj/
+out/
+
+# Arquivos de configuração e ambientes locais
+appsettings*.json
+!appsettings.json # Exceto o appsettings.json principal
+.env
+
+# Arquivos de cache do Visual Studio e outros IDEs
+.vscode/
+.vscode/*.*
+.idea/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.vsidx
+
+
+# Arquivos temporários e de backup
+*.tmp
+*.temp
+*.bak
+*.swp
+*.sln.docstates
+*.ncrunch*
+~$*
+
+# Configuração de pacotes
+**/packages/
+**/nuget.exe
+*.nupkg
+*.snupkg
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# Docker
+docker-compose.override.yml
+docker-compose.*.yml
+docker-compose.yml
+postgres_data/
+
+# Arquivos gerados pelo Rider e pela build
+.idea/
+*.sln.iml
+
+# Arquivos específicos do sistema
+*.DS_Store
+Thumbs.db
