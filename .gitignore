@@ -16,6 +16,7 @@ appsettings*.json
 
 # Arquivos de cache do Visual Studio e outros IDEs
 .vscode/
+.vs/
 .vscode/*.*
 .idea/
 *.suo
