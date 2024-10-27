@@ -1,42 +1,61 @@
-﻿using Microsoft.AspNetCore.Mvc;
-
+﻿using IqueiriumBackendProject.Src.Application.Dtos;
+using IqueiriumBackendProject.Src.Application.Services;
+using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace IqueiriumBackendProject.Src.Api.Controllers
 {
-    [Route("product")]
+    [Route("api/product")]
     [ApiController]
     public class ProductController : ControllerBase
     {
-        // GET: api/product
-        [HttpGet]
-        public IEnumerable<string> Get()
+        private readonly ProductService _productService;
+
+        public ProductController(ProductService productService)
         {
-            return new string[] { "value1", "value2" };
+            _productService = productService;
         }
 
-        // GET api/product/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        // GET: api/product
+        [HttpGet]
+        public IActionResult GetAll()
         {
-            return "value";
+            return Ok(new string[] { "Produto1", "Produto2" });
+        }
+
+        // GET api/product/id
+        [HttpGet("{id}")]
+        public IActionResult GetById(int id)
+        {
+            return Ok("Produto específico");
         }
 
         // POST api/product
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<IActionResult> CreateProduct([FromBody] CreateProductDto productDto)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var createdProduct = await _productService.AddProductAsync(productDto);
+            return CreatedAtAction("POST api/product", new { id = createdProduct.Id }, createdProduct);
         }
 
-        // PUT api/product/5
+        // PUT api/product/id
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public IActionResult Update(int id, [FromBody] string value)
         {
+            return NoContent();
         }
 
-        // DELETE api/product/5
+        // DELETE api/product/id
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(int id)
         {
+            return NoContent();
         }
     }
 }
