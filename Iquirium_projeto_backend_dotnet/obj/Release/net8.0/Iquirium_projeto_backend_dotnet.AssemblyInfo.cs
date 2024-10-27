@@ -12,7 +12,7 @@ using System;
 using System.Reflection;
 
 [assembly: System.Reflection.AssemblyCompanyAttribute("Iquirium_projeto_backend_dotnet")]
-[assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
+[assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e15dbe9986b6bae6fbacc8eb31b236133493a3e2")]
 [assembly: System.Reflection.AssemblyProductAttribute("Iquirium_projeto_backend_dotnet")]
