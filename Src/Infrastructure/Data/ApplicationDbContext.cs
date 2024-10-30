@@ -12,10 +12,13 @@ namespace IqueiriumBackendProject.Src.Infrastructure.Data
 
         public DbSet<ProductEntity> Products { get; set; }
 
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
             // Configurações adicionais, se necessário
+
+
         }
     }
 }

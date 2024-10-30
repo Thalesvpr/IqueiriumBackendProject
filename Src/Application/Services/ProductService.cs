@@ -2,6 +2,7 @@
 using IqueiriumBackendProject.Src.Application.Dtos;
 using IqueiriumBackendProject.Src.Infrastructure.Data;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace IqueiriumBackendProject.Src.Application.Services
 {
@@ -27,6 +28,17 @@ namespace IqueiriumBackendProject.Src.Application.Services
 
             _context.Products.Add(product);
             await _context.SaveChangesAsync();
+            return product;
+        }
+
+        public async Task<ProductEntity> GetProductByIdAsync(int id)
+        {
+            var product = await _context.Products.FindAsync(id);
+            return product;
+        }
+        public async Task<IEnumerable<ProductEntity>> GetAllProductsAsync()
+        {
+            var product = await _context.Products.ToListAsync();
             return product;
         }
     }

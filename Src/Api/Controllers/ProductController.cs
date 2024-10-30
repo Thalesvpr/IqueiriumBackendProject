@@ -1,5 +1,6 @@
 ﻿using IqueiriumBackendProject.Src.Application.Dtos;
 using IqueiriumBackendProject.Src.Application.Services;
+using IqueiriumBackendProject.Src.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -19,16 +20,18 @@ namespace IqueiriumBackendProject.Src.Api.Controllers
 
         // GET: api/product
         [HttpGet]
-        public IActionResult GetAll()
+        public async Task<IActionResult> GetAll()
         {
-            return Ok(new string[] { "Produto1", "Produto2" });
+            var products = await _productService.GetAllProductsAsync();
+            return Ok(products);
         }
 
         // GET api/product/id
         [HttpGet("{id}")]
-        public IActionResult GetById(int id)
+        public async Task<IActionResult> GetById(int id)
         {
-            return Ok("Produto específico");
+            var product = await _productService.GetProductByIdAsync(id);
+            return Ok(product);
         }
 
         // POST api/product
