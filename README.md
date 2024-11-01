@@ -16,7 +16,6 @@ Permite que os usuários forneçam feedbacks sobre o uso da plataforma, incluind
   - Texto do feedback.
   - Tipo de feedback (sugestão, comentário, erro).
   - Data e hora do envio.
-- **Frontend**: Interface de formulário com campos para os diferentes tipos de feedbacks e mensagem de confirmação de envio.
 - **Backend**: APIs para receber e armazenar feedbacks com autenticação e autorização de usuários autenticados.
 
 #### Regras de Negócio
