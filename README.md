@@ -31,7 +31,8 @@ Permite que os usuários forneçam feedbacks sobre o uso da plataforma, incluind
 - Engajamento de usuários recorrentes.
 
 ### Diagrama de Classes
-![feedback-produto2](https://github.com/user-attachments/assets/4e6675ef-1ea3-40fd-992a-7d2298a009db)
+![feedbackProduto (1)](https://github.com/user-attachments/assets/e35042f3-d6b7-4bb8-bda1-4b89217f17e7)
+
 
 
 ### Diagrama de Casos de Uso
