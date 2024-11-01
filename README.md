@@ -4,7 +4,7 @@
 A plataforma IQuirium oferece duas funcionalidades de feedback. A "Captura de Feedbacks sobre o Produto" permite aos usuários fornecer opiniões sobre uso, funcionalidades e melhorias através de formulários ou questionários rápidos, facilitando a coleta de insights. A funcionalidade "Envio e Recebimento de Feedbacks entre Usuários" promove colaboração e desenvolvimento pessoal, permitindo que os usuários enviem ou solicitem feedbacks sobre competências, comportamentos e atividades. Essa troca ajuda no crescimento contínuo e autodesenvolvimento entre colegas e mentores.
 
 ### 1. Feedbacks do Produto
-Permite que os usuários forneçam feedbacks sobre o uso da plataforma, incluindo sugestões de melhoria, relato de problemas técnicos e comentários gerais.
+Permite que os usuários forneçam feedbacks sobre o uso do produto, incluindo sugestões de melhoria, relato de problemas técnicos e comentários gerais.
 
 #### Fluxo de Usuário
 1. **Envio de Feedback Espontâneo**: O usuário acessa a seção de feedbacks no menu da plataforma, preenche um formulário com as informações desejadas e envia o feedback.
