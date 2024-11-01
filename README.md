@@ -21,8 +21,7 @@ Permite que os usuários forneçam feedbacks sobre o uso da plataforma, incluind
 
 #### Regras de Negócio
 1. Somente usuários autenticados podem enviar feedbacks.
-2. O feedback pode ser parcial, permitindo ao usuário preencher apenas os campos desejados.
-3. Não há limites para o número de feedbacks enviados por usuário.
+2.  Não há limites para o número de feedbacks enviados por usuário.
 
 #### Métricas de Sucesso
 - Taxa de envio de feedbacks.
@@ -56,7 +55,6 @@ Facilita a troca de feedbacks entre os usuários, com o objetivo de fomentar a c
   - ID do remetente e destinatário.
   - Tipo de feedback.
   - Data e hora do envio.
-- **Frontend**: Interfaces para envio, solicitação e visualização de feedbacks, além de opções de reportar conteúdo.
 - **Backend**: APIs para envio, recebimento e report de feedbacks, além de um sistema de moderação para revisão de feedbacks reportados.
 
 #### Regras de Negócio
