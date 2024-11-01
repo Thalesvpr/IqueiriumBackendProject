@@ -1,8 +1,9 @@
-﻿using IqueiriumBackendProject.Src.Domain.Entities;
-using IqueiriumBackendProject.Src.Application.Dtos;
-using IqueiriumBackendProject.Src.Infrastructure.Data;
+﻿using IqueiriumBackendProject.Src.Infrastructure.Data;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using IqueiriumBackendProject.Src.Domain.Entities.ProductEntities;
+using IqueiriumBackendProject.Src.Application.Dtos.Products;
 
 namespace IqueiriumBackendProject.Src.Application.Services
 {
@@ -15,15 +16,11 @@ namespace IqueiriumBackendProject.Src.Application.Services
             _context = context;
         }
 
-        public async Task<ProductEntity> AddProductAsync(CreateProductDto productDto)
+        public async Task<Product> AddProductAsync(CreateProductDto productDto)
         {
-            var product = new ProductEntity
+            var product = new Product
             {
-                Title = productDto.Title,
-                Description = productDto.Description,
-                Price = productDto.Price,
-                Status = productDto.Status,
-                CreatedAt = productDto.CreatedAt
+                Name = productDto.Name // Ajustado para refletir apenas a propriedade 'Name'
             };
 
             _context.Products.Add(product);
@@ -31,15 +28,16 @@ namespace IqueiriumBackendProject.Src.Application.Services
             return product;
         }
 
-        public async Task<ProductEntity> GetProductByIdAsync(int id)
+        public async Task<Product> GetProductByIdAsync(int id)
         {
             var product = await _context.Products.FindAsync(id);
             return product;
         }
-        public async Task<IEnumerable<ProductEntity>> GetAllProductsAsync()
+
+        public async Task<IEnumerable<Product>> GetAllProductsAsync()
         {
-            var product = await _context.Products.ToListAsync();
-            return product;
+            var products = await _context.Products.ToListAsync();
+            return products;
         }
     }
 }

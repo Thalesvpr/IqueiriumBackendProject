@@ -1,3 +1,4 @@
+using IqueiriumBackendProject.Src.Application.Services;
 using IqueiriumBackendProject.Src.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,6 +11,13 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 // Configura o Swagger
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+
+builder.Services.AddScoped<UserService>();
+builder.Services.AddScoped<ProductService>();
+builder.Services.AddScoped<ProductFeedbackService>();
+builder.Services.AddScoped<ProductFeedbackAnalysisService>();
+
 
 builder.Services.AddControllers();
 

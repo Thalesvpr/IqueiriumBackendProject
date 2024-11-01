@@ -1,4 +1,4 @@
-﻿using IqueiriumBackendProject.Src.Application.Dtos;
+﻿using IqueiriumBackendProject.Src.Application.Dtos.Products;
 using IqueiriumBackendProject.Src.Application.Services;
 using IqueiriumBackendProject.Src.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
@@ -44,8 +44,9 @@ namespace IqueiriumBackendProject.Src.Api.Controllers
             }
 
             var createdProduct = await _productService.AddProductAsync(productDto);
-            return CreatedAtAction("POST api/product", new { id = createdProduct.Id }, createdProduct);
+            return CreatedAtAction(nameof(GetById), new { id = createdProduct.Id }, createdProduct);
         }
+
 
         // PUT api/product/id
         [HttpPut("{id}")]
