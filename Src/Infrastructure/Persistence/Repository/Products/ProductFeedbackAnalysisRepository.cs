@@ -2,7 +2,7 @@
 using IqueiriumBackendProject.Src.Infrastructure.Persistence.Repository;
 using Microsoft.EntityFrameworkCore;
 
-namespace IqueiriumBackendProject.Src.Infrastructure.Persistence.Products
+namespace IqueiriumBackendProject.Src.Infrastructure.Persistence.Repository.Products
 {
     public class ProductFeedbackAnalysisRepository : BaseRepository<ProductFeedbackAnalysis>
     {

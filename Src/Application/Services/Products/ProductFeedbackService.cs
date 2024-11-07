@@ -2,20 +2,16 @@
 using IqueiriumBackendProject.Src.Domain.Entities.ProductEntities;
 using IqueiriumBackendProject.Src.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
-using System.Threading.Tasks;
-using System.Linq;
 
 namespace IqueiriumBackendProject.Src.Application.Services.Products
 {
     public class ProductFeedbackService
     {
         private readonly ApplicationDbContext _context;
-
         public ProductFeedbackService(ApplicationDbContext context)
         {
             _context = context;
         }
-
         public async Task<ProductFeedbackResponseDTO> SubmitFeedback(ProductFeedbackCreateDTO feedbackDto)
         {
             var feedback = new ProductFeedback

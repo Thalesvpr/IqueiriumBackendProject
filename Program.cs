@@ -1,7 +1,8 @@
 using IqueiriumBackendProject.Src.Application.Services;
 using IqueiriumBackendProject.Src.Application.Services.Products;
 using IqueiriumBackendProject.Src.Infrastructure.Data;
-using IqueiriumBackendProject.Src.Infrastructure.Persistence.Products;
+using IqueiriumBackendProject.Src.Infrastructure.Persistence.Repository;
+using IqueiriumBackendProject.Src.Infrastructure.Persistence.Repository.Products;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
