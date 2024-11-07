@@ -3,7 +3,7 @@ using IqueiriumBackendProject.Src.Domain.Entities.ProductEntities;
 using IqueiriumBackendProject.Src.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
-namespace IqueiriumBackendProject.Src.Application.Services
+namespace IqueiriumBackendProject.Src.Application.Services.Products
 {
     public class ProductFeedbackAnalysisService
     {

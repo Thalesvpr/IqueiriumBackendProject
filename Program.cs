@@ -1,4 +1,5 @@
 using IqueiriumBackendProject.Src.Application.Services;
+using IqueiriumBackendProject.Src.Application.Services.Products;
 using IqueiriumBackendProject.Src.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 

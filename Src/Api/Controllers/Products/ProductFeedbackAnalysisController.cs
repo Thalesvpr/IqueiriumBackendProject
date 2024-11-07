@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using IqueiriumBackendProject.Src.Application.Dtos.Products;
-using IqueiriumBackendProject.Src.Application.Services;
+using IqueiriumBackendProject.Src.Application.Services.Products;
 
 namespace IqueiriumBackendProject.Src.Api.Controllers.Products
 {

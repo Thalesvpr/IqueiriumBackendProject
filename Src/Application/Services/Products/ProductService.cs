@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using IqueiriumBackendProject.Src.Domain.Entities.ProductEntities;
 using IqueiriumBackendProject.Src.Application.Dtos.Products;
 
-namespace IqueiriumBackendProject.Src.Application.Services
+namespace IqueiriumBackendProject.Src.Application.Services.Products
 {
     public class ProductService
     {

@@ -1,5 +1,5 @@
 ﻿using IqueiriumBackendProject.Src.Application.Dtos.Products;
-using IqueiriumBackendProject.Src.Application.Services;
+using IqueiriumBackendProject.Src.Application.Services.Products;
 using IqueiriumBackendProject.Src.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;

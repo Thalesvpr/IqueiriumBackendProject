@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 using System.Linq;
 
-namespace IqueiriumBackendProject.Src.Application.Services
+namespace IqueiriumBackendProject.Src.Application.Services.Products
 {
     public class ProductFeedbackService
     {
