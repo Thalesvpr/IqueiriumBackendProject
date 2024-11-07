@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace IqueiriumBackendProject.Src.Api.Controllers
+namespace IqueiriumBackendProject.Src.Api.Controllers.Products
 {
     [Route("api/product")]
     [ApiController]

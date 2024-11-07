@@ -2,7 +2,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using IqueiriumBackendProject.Src.Domain.Entities.UserEntities;
-using IqueiriumBackendProject.Src.Domain.Entities.ProductEntities.ManyToMany;
 
 namespace IqueiriumBackendProject.Src.Domain.Entities.ProductEntities
 {
@@ -13,14 +12,17 @@ namespace IqueiriumBackendProject.Src.Domain.Entities.ProductEntities
         [Required]
         public int AnalystUserId { get; set; }
 
-        // Propriedade de navegação para o usuário que realizou a análise
         public User User { get; set; }
 
         [Required]
         [Column("content", TypeName = "text")]
         public string Content { get; set; }
 
-        // Relação muitos-para-muitos entre ProductFeedback e ProductFeedbackAnalysis
-        public ICollection<ProductFeedbackAnalysisProductFeedback> ProductFeedbackAnalysisProductFeedbacks { get; set; }
+        [ForeignKey("ProductFeedback")]
+        [Column("feedback_id")]
+        [Required]
+        public int ProductFeedbackId { get; set; }
+
+        public ProductFeedback ProductFeedback { get; set; }
     }
 }

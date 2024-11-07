@@ -2,6 +2,8 @@
 using IqueiriumBackendProject.Src.Domain.Entities.ProductEntities;
 using IqueiriumBackendProject.Src.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
+using System.Linq;
 
 namespace IqueiriumBackendProject.Src.Application.Services
 {
@@ -21,7 +23,8 @@ namespace IqueiriumBackendProject.Src.Application.Services
                 ProductId = feedbackDto.ProductId,
                 Content = feedbackDto.Content,
                 FeedbackType = feedbackDto.FeedbackType,
-                CreatedDate = DateTime.UtcNow
+                CreatedDate = DateTime.UtcNow,
+                UserId = feedbackDto.UserId,
             };
 
             _context.ProductFeedbacks.Add(feedback);
@@ -50,6 +53,23 @@ namespace IqueiriumBackendProject.Src.Application.Services
                     CreatedDate = f.CreatedDate
                 })
                 .ToListAsync();
+        }
+
+        public async Task<ProductFeedbackResponseDTO> GetFeedbackByIdAsync(int id)
+        {
+            var feedback = await _context.ProductFeedbacks
+                .Where(f => f.Id == id)
+                .Select(f => new ProductFeedbackResponseDTO
+                {
+                    Id = f.Id,
+                    ProductId = f.ProductId,
+                    Content = f.Content,
+                    FeedbackType = f.FeedbackType,
+                    CreatedDate = f.CreatedDate
+                })
+                .FirstOrDefaultAsync();
+
+            return feedback;
         }
     }
 }

@@ -22,7 +22,7 @@ namespace IqueiriumBackendProject.Src.Api.Controllers
             return CreatedAtAction(nameof(Register), new { id = createdUser.Id }, createdUser);
         }
 
-        [HttpPost("authenticate")]
+        [HttpPost("login")]
         public async Task<ActionResult<UserResponseDTO>> Authenticate(UserLoginDTO loginDto)
         {
             var user = await _userService.AuthenticateUser(loginDto);
