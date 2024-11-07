@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using IqueiriumBackendProject.Src.Domain.Entities.ProductEntities.ManyToMany;
 using IqueiriumBackendProject.Src.Domain.Entities.UserEntities;
 
 namespace IqueiriumBackendProject.Src.Domain.Entities.ProductEntities
