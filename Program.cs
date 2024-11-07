@@ -1,6 +1,7 @@
 using IqueiriumBackendProject.Src.Application.Services;
 using IqueiriumBackendProject.Src.Application.Services.Products;
 using IqueiriumBackendProject.Src.Infrastructure.Data;
+using IqueiriumBackendProject.Src.Infrastructure.Persistence.Products;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -19,6 +20,10 @@ builder.Services.AddScoped<ProductService>();
 builder.Services.AddScoped<ProductFeedbackService>();
 builder.Services.AddScoped<ProductFeedbackAnalysisService>();
 
+builder.Services.AddScoped<ProductFeedbackRepository>();
+builder.Services.AddScoped<ProductRepository>();
+builder.Services.AddScoped<UserRepository>();
+builder.Services.AddScoped<ProductFeedbackAnalysisRepository>();
 
 builder.Services.AddControllers();
 
