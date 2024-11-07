@@ -4,7 +4,7 @@
 A plataforma IQuirium oferece duas funcionalidades de feedback. A "Captura de Feedbacks sobre o Produto" permite aos usuários fornecer opiniões sobre uso, funcionalidades e melhorias através de formulários ou questionários rápidos, facilitando a coleta de insights. A funcionalidade "Envio e Recebimento de Feedbacks entre Usuários" promove colaboração e desenvolvimento pessoal, permitindo que os usuários enviem ou solicitem feedbacks sobre competências, comportamentos e atividades. Essa troca ajuda no crescimento contínuo e autodesenvolvimento entre colegas e mentores.
 
 ### 1. Feedbacks do Produto
-Permite que os usuários forneçam feedbacks sobre o uso da plataforma, incluindo sugestões de melhoria, relato de problemas técnicos e comentários gerais.
+Permite que os usuários forneçam feedbacks sobre o uso do produto, incluindo sugestões de melhoria, relato de problemas técnicos e comentários gerais.
 
 #### Fluxo de Usuário
 1. **Envio de Feedback Espontâneo**: O usuário acessa a seção de feedbacks no menu da plataforma, preenche um formulário com as informações desejadas e envia o feedback.
@@ -16,13 +16,11 @@ Permite que os usuários forneçam feedbacks sobre o uso da plataforma, incluind
   - Texto do feedback.
   - Tipo de feedback (sugestão, comentário, erro).
   - Data e hora do envio.
-- **Frontend**: Interface de formulário com campos para os diferentes tipos de feedbacks e mensagem de confirmação de envio.
 - **Backend**: APIs para receber e armazenar feedbacks com autenticação e autorização de usuários autenticados.
 
 #### Regras de Negócio
 1. Somente usuários autenticados podem enviar feedbacks.
-2. O feedback pode ser parcial, permitindo ao usuário preencher apenas os campos desejados.
-3. Não há limites para o número de feedbacks enviados por usuário.
+2.  Não há limites para o número de feedbacks enviados por usuário.
 
 #### Métricas de Sucesso
 - Taxa de envio de feedbacks.
@@ -56,7 +54,6 @@ Facilita a troca de feedbacks entre os usuários, com o objetivo de fomentar a c
   - ID do remetente e destinatário.
   - Tipo de feedback.
   - Data e hora do envio.
-- **Frontend**: Interfaces para envio, solicitação e visualização de feedbacks, além de opções de reportar conteúdo.
 - **Backend**: APIs para envio, recebimento e report de feedbacks, além de um sistema de moderação para revisão de feedbacks reportados.
 
 #### Regras de Negócio
