@@ -2,6 +2,9 @@
 
 namespace IqueiriumBackendProject.Src.Application.Dtos.MemberFeedback
 {
+    /// <summary>
+    /// DTO usado para criar um feedback entre membros.
+    /// </summary>
     public class MemberFeedbackCreateDto
     {
         [Required(ErrorMessage = "O ID do remetente é obrigatório.")]
