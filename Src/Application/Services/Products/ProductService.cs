@@ -11,12 +11,27 @@ namespace IqueiriumBackendProject.Src.Application.Services.Products
     {
         private readonly ApplicationDbContext _context; // Campo para armazenar o contexto de banco de dados
 
-        public ProductService(ApplicationDbContext context) // Construtor da classe, recebe o contexto como dependência
+        /// <summary>
+        /// Inicializa uma nova instância do serviço <see cref="ProductService"/>.
+        /// </summary>
+        /// <param name="context">
+        /// Instância do <see cref="ApplicationDbContext"/> usada para acessar e manipular os dados relacionados a produtos no banco de dados.
+        /// </param>
+        public ProductService(ApplicationDbContext context)
         {
             _context = context; // Atribui o contexto passado para o campo _context
         }
 
-        public async Task<Product> AddProductAsync(ProductCreateDto productDto)
+        /// <summary>
+        /// Adiciona um novo produto ao banco de dados de forma assíncrona.
+        /// </summary>
+        /// <param name="productDto">
+        /// Objeto contendo os dados necessários para criar um novo produto, como o nome do produto.
+        /// </param>
+        /// <returns>
+        /// O objeto <see cref="Product"/> criado, contendo os dados do novo produto após ser salvo no banco de dados.
+        /// </returns>
+        public async Task<Product> AddProductAsync(CreateProductDto productDto)
         {
             // Cria um novo objeto de produto com o nome definido no DTO
             var product = new Product
@@ -34,7 +49,16 @@ namespace IqueiriumBackendProject.Src.Application.Services.Products
             return product;
         }
 
-        public async Task<Product?> GetProductByIdAsync(int id)
+        /// <summary>
+        /// Recupera um produto específico do banco de dados com base no ID fornecido.
+        /// </summary>
+        /// <param name="id">
+        /// O ID do produto a ser recuperado.
+        /// </param>
+        /// <returns>
+        /// O objeto <see cref="Product"/> correspondente ao ID fornecido, ou <c>null</c> caso o produto não seja encontrado.
+        /// </returns>
+        public async Task<Product> GetProductByIdAsync(int id)
         {
             // Busca o produto no banco de dados usando o ID fornecido
             var product = await _context.Products.FindAsync(id);
@@ -43,7 +67,13 @@ namespace IqueiriumBackendProject.Src.Application.Services.Products
             return product;
         }
 
-        public async Task<IEnumerable<Product>> GetAllProductsAsync() // Método assíncrono para obter todos os produtos
+        /// <summary>
+        /// Recupera todos os produtos armazenados no banco de dados.
+        /// </summary>
+        /// <returns>
+        /// Uma coleção de objetos <see cref="Product"/> representando todos os produtos encontrados no banco de dados.
+        /// </returns>
+        public async Task<IEnumerable<Product>> GetAllProductsAsync()
         {
             // Busca todos os produtos no banco de dados e os retorna como uma lista
             var products = await _context.Products.ToListAsync();
