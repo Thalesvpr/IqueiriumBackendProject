@@ -2,6 +2,9 @@
 
 namespace IqueiriumBackendProject.Src.Application.Dtos.Products
 {
+    /// <summary>
+    /// DTO usado para criar um novo produto.
+    /// </summary>
     public class CreateProductDto
     {
         [Required(ErrorMessage = "O nome é obrigatório.")]
