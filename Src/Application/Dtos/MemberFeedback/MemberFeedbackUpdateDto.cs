@@ -2,6 +2,9 @@
 
 namespace IqueiriumBackendProject.Src.Application.Dtos.MemberFeedback
 {
+    /// <summary>
+    /// DTO usado para atualizar as informações de um feedback de membro.
+    /// </summary>
     public class MemberFeedbackUpdateDto
     {
         [Required(ErrorMessage = "O ID do feedback é obrigatório.")]
