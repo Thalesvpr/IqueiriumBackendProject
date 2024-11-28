@@ -2,6 +2,9 @@
 
 namespace IqueiriumBackendProject.Src.Application.Dtos.Auth
 {
+    /// <summary>
+    /// DTO usado para retornar as informações de autenticação após o login.
+    /// </summary>
     public class AuthResponseDto 
     {
         public string Token { get; set; }
