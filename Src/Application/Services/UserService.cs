@@ -9,11 +9,26 @@ namespace IqueiriumBackendProject.Src.Application.Services
     {
         private readonly ApplicationDbContext _context;
 
+        /// <summary>
+        /// Inicializa uma nova instância do serviço <see cref="UserService"/>.
+        /// </summary>
+        /// <param name="context">
+        /// Instância do <see cref="ApplicationDbContext"/> usada para acessar e manipular os dados do usuário no banco de dados.
+        /// </param>
         public UserService(ApplicationDbContext context)
         {
             _context = context;
         }
 
+        /// <summary>
+        /// Registra um novo usuário no sistema.
+        /// </summary>
+        /// <param name="userDto">
+        /// Objeto contendo os dados necessários para registrar um novo usuário, como nome, email e senha.
+        /// </param>
+        /// <returns>
+        /// Um objeto <see cref="UserResponseDTO"/> contendo os dados do usuário recém-criado, incluindo ID, nome e email.
+        /// </returns>
         public async Task<UserResponseDTO> RegisterUser(UserRegisterDTO userDto)
         {
             var user = new User
@@ -34,6 +49,15 @@ namespace IqueiriumBackendProject.Src.Application.Services
             };
         }
 
+        /// <summary>
+        /// Autentica um usuário com base no email e senha fornecidos.
+        /// </summary>
+        /// <param name="loginDto">
+        /// Objeto contendo as credenciais de login, como email e senha.
+        /// </param>
+        /// <returns>
+        /// Um objeto <see cref="UserResponseDTO"/> com os dados do usuário autenticado, ou <c>null</c> caso as credenciais sejam inválidas.
+        /// </returns>
         public async Task<UserResponseDTO> AuthenticateUser(UserLoginDTO loginDto)
         {
             var user = await _context.Users
