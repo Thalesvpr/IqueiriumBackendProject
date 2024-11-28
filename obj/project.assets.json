@@ -3951,19 +3951,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\thale\\.nuget\\packages\\": {}
+    "C:\\Users\\ing_a\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\DEV\\ESTUDOS\\PROJ\\IqueiriumBackendProject\\IqueiriumBackendProject.csproj",
+      "projectUniqueName": "C:\\Users\\ing_a\\API-Feedback\\IqueiriumBackendProject.csproj",
       "projectName": "IqueiriumBackendProject",
-      "projectPath": "C:\\DEV\\ESTUDOS\\PROJ\\IqueiriumBackendProject\\IqueiriumBackendProject.csproj",
-      "packagesPath": "C:\\Users\\thale\\.nuget\\packages\\",
-      "outputPath": "C:\\DEV\\ESTUDOS\\PROJ\\IqueiriumBackendProject\\obj\\",
+      "projectPath": "C:\\Users\\ing_a\\API-Feedback\\IqueiriumBackendProject.csproj",
+      "packagesPath": "C:\\Users\\ing_a\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\ing_a\\API-Feedback\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\thale\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\ing_a\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -3971,6 +3971,7 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -4056,7 +4057,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

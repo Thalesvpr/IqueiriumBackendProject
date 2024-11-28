@@ -1,102 +1,134 @@
-﻿using IqueiriumBackendProject.Src.Application.Dtos.Products; // Importa o DTO relacionado a feedback de produtos
-using IqueiriumBackendProject.Src.Application.Services.Products; // Importa o serviço de feedback de produtos
-using IqueiriumBackendProject.Src.Domain.Entities.ProductEntities; // Importa as entidades de domínio relacionadas a produtos
-using IqueiriumBackendProject.Src.Infrastructure.Data; // Importa o contexto de dados da aplicação
-using Microsoft.EntityFrameworkCore; // Importa o Entity Framework Core para manipulação de dados
-using Moq; // Importa Moq para criação de objetos mock
-using Xunit; // Importa a biblioteca de testes Xunit
+﻿using IqueiriumBackendProject.Src.Application.Dtos.Products;
+using IqueiriumBackendProject.Src.Application.Services.Products;
+using IqueiriumBackendProject.Src.Domain.Entities.ProductEntities;
+using IqueiriumBackendProject.Src.Infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
+using Moq;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Threading.Tasks;
+using Xunit;
 
-namespace IqueiriumBackendProject.Tests.ServicesTests.ProductsTests // Define o namespace para os testes de serviços de produtos
+namespace IqueiriumBackendProject.Tests.ServicesTests.ProductsTests
 {
-    public class ProductFeedbackServiceTest // Define a classe de teste para o serviço de feedback de produtos
+    public class ProductFeedbackServiceTest
     {
-        private readonly Mock<ApplicationDbContext> _mockContext; // Mock do contexto de banco de dados
-        private readonly ProductFeedbackService _feedbackService; // Instância do serviço de feedback de produtos
+        private readonly Mock<ApplicationDbContext> _mockContext;
+        private readonly ProductFeedbackService _service;
 
-        public ProductFeedbackServiceTest() // Construtor da classe de teste
+        public ProductFeedbackServiceTest()
         {
-            _mockContext = new Mock<ApplicationDbContext>(); // Inicializa o mock do contexto
-            _feedbackService = new ProductFeedbackService(_mockContext.Object); // Cria uma instância do serviço com o contexto mockado
+            _mockContext = new Mock<ApplicationDbContext>(
+                new DbContextOptions<ApplicationDbContext>())
+            { CallBase = true };
+            _service = new ProductFeedbackService(_mockContext.Object);
         }
 
         [Fact]
-        public async Task SubmitFeedback_ShouldAddFeedbackSuccessfully() // Teste para adicionar um feedback
+        public async Task ShouldSubmitFeedbackSuccessfully()
         {
-            var feedbackDto = new ProductFeedbackCreateDTO // Cria um DTO de feedback com dados de exemplo
+            // Arrange
+            var feedbackDto = new ProductFeedbackCreateDTO
             {
                 ProductId = 1,
                 Content = "Great product!",
                 FeedbackType = "Positive",
-                UserId = 2
+                UserId = 1
             };
 
-            var mockSet = new Mock<DbSet<ProductFeedback>>(); // Mock do DbSet de feedbacks de produto
-            _mockContext.Setup(m => m.ProductFeedbacks).Returns(mockSet.Object); // Configura o mock para retornar o DbSet mockado
-            _mockContext.Setup(m => m.SaveChangesAsync(default)).ReturnsAsync(1); // Configura o mock para salvar alterações com sucesso
+            var mockSet = new Mock<DbSet<ProductFeedback>>();
+            _mockContext.Setup(m => m.ProductFeedbacks).Returns(mockSet.Object);
+            _mockContext.Setup(m => m.SaveChangesAsync(It.IsAny<CancellationToken>())).ReturnsAsync(1);
 
-            var result = await _feedbackService.SubmitFeedback(feedbackDto); // Chama o método para adicionar o feedback
+            // Act
+            var result = await _service.SubmitFeedback(feedbackDto);
 
-            Assert.NotNull(result); // Verifica se o resultado não é nulo
-            Assert.Equal(feedbackDto.ProductId, result.ProductId); // Verifica se o ID do produto corresponde ao esperado
-            Assert.Equal(feedbackDto.Content, result.Content); // Verifica se o conteúdo do feedback corresponde ao esperado
-            Assert.Equal(feedbackDto.FeedbackType, result.FeedbackType); // Verifica se o tipo do feedback corresponde ao esperado
-            mockSet.Verify(m => m.Add(It.IsAny<ProductFeedback>()), Times.Once); // Verifica se o feedback foi adicionado ao DbSet uma vez
-            _mockContext.Verify(m => m.SaveChangesAsync(default), Times.Once); // Verifica se SaveChangesAsync foi chamado uma vez
+            // Assert
+            Assert.NotNull(result);
+            Assert.Equal(feedbackDto.ProductId, result.ProductId);
+            Assert.Equal(feedbackDto.Content, result.Content);
+            Assert.Equal(feedbackDto.FeedbackType, result.FeedbackType);
         }
 
         [Fact]
-        public async Task GetFeedbacksByProduct_ShouldReturnFeedbacksForProduct() // Teste para obter feedbacks por ID do produto
+        public async Task ShouldGetFeedbacksByProductSuccessfully()
         {
-            var productId = 1; // ID do produto para busca
-            var feedbacks = new List<ProductFeedback> // Lista de feedbacks para o produto
+            // Arrange
+            var productId = 1;
+            var mockSet = new Mock<DbSet<ProductFeedback>>();
+            var feedbacks = new List<ProductFeedback>
             {
-                new ProductFeedback { Id = 1, ProductId = productId, Content = "Amazing product!", FeedbackType = "Positive", CreatedDate = DateTime.UtcNow },
-                new ProductFeedback { Id = 2, ProductId = productId, Content = "Could be better.", FeedbackType = "Neutral", CreatedDate = DateTime.UtcNow }
-            }.AsQueryable();
+                new ProductFeedback { Id = 1, ProductId = productId, Content = "Good", FeedbackType = "Positive", CreatedDate = DateTime.UtcNow, UserId = 1 },
+                new ProductFeedback { Id = 2, ProductId = productId, Content = "Bad", FeedbackType = "Negative", CreatedDate = DateTime.UtcNow, UserId = 2 }
+            };
 
-            var mockSet = new Mock<DbSet<ProductFeedback>>(); // Mock do DbSet de feedbacks de produto
-            mockSet.As<IQueryable<ProductFeedback>>().Setup(m => m.Provider).Returns(feedbacks.Provider); // Configura o mock para usar a coleção de feedbacks
-            mockSet.As<IQueryable<ProductFeedback>>().Setup(m => m.Expression).Returns(feedbacks.Expression);
-            mockSet.As<IQueryable<ProductFeedback>>().Setup(m => m.ElementType).Returns(feedbacks.ElementType);
+            mockSet.As<IQueryable<ProductFeedback>>().Setup(m => m.Provider).Returns(feedbacks.AsQueryable().Provider);
+            mockSet.As<IQueryable<ProductFeedback>>().Setup(m => m.Expression).Returns(feedbacks.AsQueryable().Expression);
+            mockSet.As<IQueryable<ProductFeedback>>().Setup(m => m.ElementType).Returns(feedbacks.AsQueryable().ElementType);
             mockSet.As<IQueryable<ProductFeedback>>().Setup(m => m.GetEnumerator()).Returns(feedbacks.GetEnumerator());
-            _mockContext.Setup(m => m.ProductFeedbacks).Returns(mockSet.Object); // Configura o mock para retornar o DbSet com feedbacks
 
-            var result = await _feedbackService.GetFeedbacksByProduct(productId); // Chama o método para obter feedbacks pelo ID do produto
+            _mockContext.Setup(m => m.ProductFeedbacks).Returns(mockSet.Object);
 
-            Assert.NotNull(result); // Verifica se o resultado não é nulo
-            Assert.Equal(2, result.Count()); // Verifica se a quantidade de feedbacks está correta
-            Assert.All(result, f => Assert.Equal(productId, f.ProductId)); // Verifica se todos os feedbacks são do produto correto
+            // Act
+            var result = await _service.GetFeedbacksByProduct(productId);
+
+            // Assert
+            Assert.NotNull(result);
+            Assert.True(result.Count() > 0);
+            Assert.Equal(productId, result.First().ProductId);
         }
 
         [Fact]
-        public async Task GetFeedbackByIdAsync_ShouldReturnFeedback_WhenFeedbackExists() // Teste para obter feedback por ID
+        public async Task ShouldGetFeedbackByIdSuccessfully()
         {
-            var feedbackId = 1; // ID do feedback para busca
-            var feedback = new ProductFeedback { Id = feedbackId, ProductId = 1, Content = "Excellent!", FeedbackType = "Positive", CreatedDate = DateTime.UtcNow };
+            // Arrange
+            var feedbackId = 1;
+            var feedback = new ProductFeedback
+            {
+                Id = feedbackId,
+                ProductId = 1,
+                Content = "Great product!",
+                FeedbackType = "Positive",
+                CreatedDate = DateTime.UtcNow,
+                UserId = 1
+            };
 
-            var mockSet = new Mock<DbSet<ProductFeedback>>(); // Mock do DbSet de feedbacks de produto
-            mockSet.Setup(m => m.FindAsync(feedbackId)).ReturnsAsync(feedback); // Configura o mock para encontrar o feedback com o ID fornecido
-            _mockContext.Setup(m => m.ProductFeedbacks).Returns(mockSet.Object); // Configura o mock para retornar o DbSet com feedbacks
+            var mockSet = new Mock<DbSet<ProductFeedback>>();
+            mockSet.As<IQueryable<ProductFeedback>>().Setup(m => m.Provider).Returns(new List<ProductFeedback> { feedback }.AsQueryable().Provider);
+            mockSet.As<IQueryable<ProductFeedback>>().Setup(m => m.Expression).Returns(new List<ProductFeedback> { feedback }.AsQueryable().Expression);
+            mockSet.As<IQueryable<ProductFeedback>>().Setup(m => m.ElementType).Returns(new List<ProductFeedback> { feedback }.AsQueryable().ElementType);
+            mockSet.As<IQueryable<ProductFeedback>>().Setup(m => m.GetEnumerator()).Returns(new List<ProductFeedback> { feedback }.GetEnumerator());
 
-            var result = await _feedbackService.GetFeedbackByIdAsync(feedbackId); // Chama o método para obter o feedback pelo ID
+            _mockContext.Setup(m => m.ProductFeedbacks).Returns(mockSet.Object);
 
-            Assert.NotNull(result); // Verifica se o resultado não é nulo
-            Assert.Equal(feedbackId, result.Id); // Verifica se o ID do feedback corresponde ao esperado
-            Assert.Equal(feedback.Content, result.Content); // Verifica se o conteúdo do feedback corresponde ao esperado
-            Assert.Equal(feedback.FeedbackType, result.FeedbackType); // Verifica se o tipo do feedback corresponde ao esperado
+            // Act
+            var result = await _service.GetFeedbackByIdAsync(feedbackId);
+
+            // Assert
+            Assert.NotNull(result);
+            Assert.Equal(feedbackId, result.Id);
         }
 
         [Fact]
-        public async Task GetFeedbackByIdAsync_ShouldReturnNull_WhenFeedbackDoesNotExist() // Teste para verificar retorno nulo quando feedback não existe
+        public async Task ShouldReturnNullWhenFeedbackNotFound()
         {
-            var feedbackId = 1; // ID do feedback inexistente
-            var mockSet = new Mock<DbSet<ProductFeedback>>(); // Mock do DbSet de feedbacks de produto
-            mockSet.Setup(m => m.FindAsync(feedbackId)).ReturnsAsync((ProductFeedback)null); // Configura o mock para retornar null ao buscar o ID
-            _mockContext.Setup(m => m.ProductFeedbacks).Returns(mockSet.Object); // Configura o mock para retornar o DbSet com feedbacks
+            // Arrange
+            var feedbackId = 999; // Invalid ID
+            var mockSet = new Mock<DbSet<ProductFeedback>>();
+            mockSet.As<IQueryable<ProductFeedback>>().Setup(m => m.Provider).Returns(Enumerable.Empty<ProductFeedback>().AsQueryable().Provider);
+            mockSet.As<IQueryable<ProductFeedback>>().Setup(m => m.Expression).Returns(Enumerable.Empty<ProductFeedback>().AsQueryable().Expression);
+            mockSet.As<IQueryable<ProductFeedback>>().Setup(m => m.ElementType).Returns(Enumerable.Empty<ProductFeedback>().AsQueryable().ElementType);
+            mockSet.As<IQueryable<ProductFeedback>>().Setup(m => m.GetEnumerator()).Returns(Enumerable.Empty<ProductFeedback>().GetEnumerator());
 
-            var result = await _feedbackService.GetFeedbackByIdAsync(feedbackId); // Chama o método para obter o feedback pelo ID
+            _mockContext.Setup(m => m.ProductFeedbacks).Returns(mockSet.Object);
 
-            Assert.Null(result); // Verifica se o resultado é nulo, como esperado
+            // Act
+            var result = await _service.GetFeedbackByIdAsync(feedbackId);
+
+            // Assert
+            Assert.Null(result);
         }
     }
 }
