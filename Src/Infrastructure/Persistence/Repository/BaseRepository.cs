@@ -1,4 +1,5 @@
 ﻿using IqueiriumBackendProject.Src.Domain.Interfaces.Infraestructure.Persistence.Repository;
+using IqueiriumBackendProject.Src.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 
 namespace IqueiriumBackendProject.Src.Infrastructure.Persistence.Repository
@@ -8,7 +9,7 @@ namespace IqueiriumBackendProject.Src.Infrastructure.Persistence.Repository
         protected readonly DbContext _context;
         protected readonly DbSet<T> _dbSet;
 
-        protected BaseRepository(DbContext context)
+        protected BaseRepository(ApplicationDbContext context)
         {
             _context = context;
             _dbSet = context.Set<T>();
