@@ -2,6 +2,9 @@
 
 namespace IqueiriumBackendProject.Src.Application.Dtos.Products
 {
+    /// <summary>
+    /// DTO usado para criar um novo feedback de produto.
+    /// </summary>
     public class ProductFeedbackCreateDTO
     {
         [Required(ErrorMessage = "O ID do produto é obrigatório.")]
