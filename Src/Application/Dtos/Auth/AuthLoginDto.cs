@@ -2,6 +2,9 @@
 
 namespace IqueiriumBackendProject.Src.Application.Dtos.Auth
 {
+    /// <summary>
+    /// DTO usado para autenticação de usuários durante o login.
+    /// </summary>
     public class AuthLoginDto
     {
         [Required(ErrorMessage = "O email é obrigatório.")]
