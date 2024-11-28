@@ -1,5 +1,8 @@
 ﻿namespace IqueiriumBackendProject.Src.Application.Dtos.Products
 {
+    /// <summary>
+    /// DTO usado para retornar as informações de um feedback de produto.
+    /// </summary>
     public class ProductFeedbackResponseDTO
     {
         public int Id { get; set; }
