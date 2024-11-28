@@ -2,7 +2,9 @@
 
 namespace IqueiriumBackendProject.Src.Application.Dtos.Users
 {
-
+    /// <summary>
+    /// DTO usado para registrar um novo usuário no sistema.
+    /// </summary>
     public class UserRegisterDTO
     {
         [Required(ErrorMessage = "O nome é obrigatório.")]
