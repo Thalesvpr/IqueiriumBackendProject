@@ -16,11 +16,11 @@ namespace IqueiriumBackendProject.Src.Application.Services.Products
             _context = context;
         }
 
-        public async Task<Product> AddProductAsync(CreateProductDto productDto)
+        public async Task<Product> AddProductAsync(ProductCreateDto productDto)
         {
             var product = new Product
             {
-                Name = productDto.Name // Ajustado para refletir apenas a propriedade 'Name'
+                Name = productDto.Name
             };
 
             _context.Products.Add(product);
@@ -28,7 +28,7 @@ namespace IqueiriumBackendProject.Src.Application.Services.Products
             return product;
         }
 
-        public async Task<Product> GetProductByIdAsync(int id)
+        public async Task<Product?> GetProductByIdAsync(int id)
         {
             var product = await _context.Products.FindAsync(id);
             return product;
