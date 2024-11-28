@@ -16,12 +16,12 @@ namespace IqueiriumBackendProject.Src.Application.Services.Products
             _context = context; // Atribui o contexto passado para o campo _context
         }
 
-        public async Task<Product> AddProductAsync(CreateProductDto productDto) // Método assíncrono para adicionar um produto
+        public async Task<Product> AddProductAsync(ProductCreateDto productDto)
         {
             // Cria um novo objeto de produto com o nome definido no DTO
             var product = new Product
             {
-                Name = productDto.Name // Define a propriedade 'Name' do produto
+                Name = productDto.Name
             };
 
             // Adiciona o produto ao DbSet de produtos no contexto
@@ -34,7 +34,7 @@ namespace IqueiriumBackendProject.Src.Application.Services.Products
             return product;
         }
 
-        public async Task<Product> GetProductByIdAsync(int id) // Método assíncrono para buscar um produto pelo ID
+        public async Task<Product?> GetProductByIdAsync(int id)
         {
             // Busca o produto no banco de dados usando o ID fornecido
             var product = await _context.Products.FindAsync(id);
