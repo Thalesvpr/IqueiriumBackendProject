@@ -36,7 +36,7 @@ namespace IqueiriumBackendProject.Src.Api.Controllers.Products
 
         // POST api/product
         [HttpPost]
-        public async Task<IActionResult> CreateProduct([FromBody] CreateProductDto productDto)
+        public async Task<IActionResult> CreateProduct([FromBody] ProductCreateDto productDto)
         {
             if (!ModelState.IsValid)
             {
