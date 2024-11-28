@@ -1,5 +1,8 @@
 ﻿namespace IqueiriumBackendProject.Src.Application.Dtos.MemberFeedback
 {
+    /// <summary>
+    /// DTO usado para retornar informações sobre um relatório de feedback de membro.
+    /// </summary>
     public class MemberFeedbackReportResponseDto
     {
         public int Id { get; set; }
