@@ -2,7 +2,7 @@
 
 namespace IqueiriumBackendProject.Src.Application.Dtos.Products
 {
-    public class CreateProductDto
+    public class ProductCreateDto
     {
         [Required(ErrorMessage = "O nome é obrigatório.")]
         [MaxLength(100, ErrorMessage = "O nome deve ter no máximo 100 caracteres.")]

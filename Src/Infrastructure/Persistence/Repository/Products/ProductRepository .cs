@@ -1,4 +1,5 @@
 ﻿using IqueiriumBackendProject.Src.Domain.Entities.ProductEntities;
+using IqueiriumBackendProject.Src.Infrastructure.Data;
 using IqueiriumBackendProject.Src.Infrastructure.Persistence.Repository;
 using Microsoft.EntityFrameworkCore;
 
@@ -6,7 +7,7 @@ namespace IqueiriumBackendProject.Src.Infrastructure.Persistence.Repository.Prod
 {
     public class ProductRepository : BaseRepository<Product>
     {
-        public ProductRepository(DbContext context) : base(context)
+        public ProductRepository(ApplicationDbContext context) : base(context)
         {
         }
     }

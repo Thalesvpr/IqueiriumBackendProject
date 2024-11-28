@@ -7,14 +7,29 @@ namespace IqueiriumBackendProject.Src.Application.Services.Products // Define o 
 {
     public class ProductFeedbackService // Define a classe de serviço para gerenciamento de feedbacks de produtos
     {
-        private readonly ApplicationDbContext _context; // Declara a variável _context, que irá acessar o banco de dados
+        private readonly ApplicationDbContext _context;
 
-        public ProductFeedbackService(ApplicationDbContext context) // Construtor da classe, recebe o contexto do banco de dados
+        /// <summary>
+        /// Inicializa uma nova instância do serviço <see cref="ProductFeedbackService"/>.
+        /// </summary>
+        /// <param name="context">
+        /// Instância do <see cref="ApplicationDbContext"/> usada para acessar e manipular os dados de feedbacks no banco de dados.
+        /// </param>
+        public ProductFeedbackService(ApplicationDbContext context)
         {
             _context = context; // Inicializa o contexto com o parâmetro passado
         }
 
-        // Método assíncrono para adicionar um feedback de produto
+        /// <summary>
+        /// Submete um novo feedback para um produto e salva no banco de dados.
+        /// </summary>
+        /// <param name="feedbackDto">
+        /// Objeto contendo os dados necessários para criar o feedback, incluindo o ID do produto, 
+        /// o conteúdo, o tipo de feedback e o ID do usuário que o submeteu.
+        /// </param>
+        /// <returns>
+        /// Um objeto <see cref="ProductFeedbackResponseDTO"/> contendo os dados do feedback criado.
+        /// </returns>
         public async Task<ProductFeedbackResponseDTO> SubmitFeedback(ProductFeedbackCreateDTO feedbackDto)
         {
             // Criação de um novo objeto ProductFeedback usando os dados do DTO (feedbackDto)
@@ -43,7 +58,15 @@ namespace IqueiriumBackendProject.Src.Application.Services.Products // Define o 
             };
         }
 
-        // Método assíncrono para obter os feedbacks de um produto específico
+        /// <summary>
+        /// Obtém todos os feedbacks associados a um produto específico.
+        /// </summary>
+        /// <param name="productId">
+        /// O ID do produto cujos feedbacks devem ser recuperados.
+        /// </param>
+        /// <returns>
+        /// Uma coleção de objetos <see cref="ProductFeedbackResponseDTO"/> contendo os detalhes dos feedbacks do produto especificado.
+        /// </returns>
         public async Task<IEnumerable<ProductFeedbackResponseDTO>> GetFeedbacksByProduct(int productId)
         {
             // Consulta o banco de dados para retornar os feedbacks do produto específico (productId)
@@ -60,7 +83,16 @@ namespace IqueiriumBackendProject.Src.Application.Services.Products // Define o 
                 .ToListAsync(); // Executa a consulta e retorna os resultados como uma lista assíncrona
         }
 
-        // Método assíncrono para obter um feedback específico pelo ID
+        /// <summary>
+        /// Obtém um feedback específico com base no ID fornecido.
+        /// </summary>
+        /// <param name="id">
+        /// O ID do feedback que deve ser recuperado.
+        /// </param>
+        /// <returns>
+        /// Um objeto <see cref="ProductFeedbackResponseDTO"/> contendo os detalhes do feedback solicitado,
+        /// ou <c>null</c> se nenhum feedback com o ID especificado for encontrado.
+        /// </returns>
         public async Task<ProductFeedbackResponseDTO> GetFeedbackByIdAsync(int id)
         {
             // Consulta o banco de dados para buscar um feedback específico pelo ID

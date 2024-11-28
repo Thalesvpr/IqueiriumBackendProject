@@ -20,8 +20,14 @@ namespace IqueiriumBackendProject.Src.Domain.Entities.UserEntities
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
+        // Chave estrangeira para UserRole
+        [ForeignKey("UserRole")]
+        public int UserRoleId { get; set; }
+
+        // Propriedade de navegação para UserRole
+        public UserRole Role { get; set; }
+
         public ICollection<ProductFeedback> ProductFeedbacks { get; set; }
-        public ICollection<UserRole> UserRoles { get; set; }
         public ICollection<ProductFeedbackAnalysis> ProductFeedbackAnalyses { get; set; }
     }
 }

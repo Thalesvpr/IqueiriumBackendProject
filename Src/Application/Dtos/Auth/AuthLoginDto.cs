@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace IqueiriumBackendProject.Src.Application.Dtos.Users
+namespace IqueiriumBackendProject.Src.Application.Dtos.Auth
 {
-    public class UserLoginDTO
+    public class AuthLoginDto
     {
         [Required(ErrorMessage = "O email é obrigatório.")]
         [EmailAddress(ErrorMessage = "O email deve estar em um formato válido.")]

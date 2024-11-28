@@ -1,16 +1,25 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using IqueiriumBackendProject.Src.Domain.Enums;
 
 namespace IqueiriumBackendProject.Src.Domain.Entities.UserEntities
 {
     public class UserRole : BaseEntity
     {
-        [ForeignKey("User")]
-        [Column("user_id")]
         [Required]
-        public int UserId { get; set; }
+        [Column(TypeName = "nvarchar(max)")]
+        public UserRoleType Type { get; set; }
 
-        [InverseProperty("UserRoles")]
-        public User User { get; set; }
+
+        // Função para converter uma string em UserRoleType
+        public static UserRoleType ParseRole(string role)
+        {
+            if (Enum.TryParse(role, true, out UserRoleType parsedRole))
+            {
+                return parsedRole;
+            }
+            throw new ArgumentException($"Role '{role}' is not valid.");
+        }
+
     }
 }
