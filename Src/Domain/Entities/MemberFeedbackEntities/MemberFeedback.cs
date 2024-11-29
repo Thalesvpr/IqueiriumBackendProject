@@ -3,7 +3,8 @@ using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace IqueiriumBackendProject.Src.Domain.Entities.MemberFeedback
+
+namespace IqueiriumBackendProject.Src.Domain.Entities.MemberFeedbackEntities
 {
     public class MemberFeedback : BaseEntity
     {
