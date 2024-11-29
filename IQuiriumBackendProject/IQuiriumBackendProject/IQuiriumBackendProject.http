@@ -1,0 +1,6 @@
+@IQuiriumBackendProject_HostAddress = http://localhost:5057
+
+GET {{IQuiriumBackendProject_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

@@ -1,0 +1,5 @@
+C:\Users\ing_a\source\repos\IQuiriumBackendProject\IQuiriumBackendProjectTest\obj\Debug\net8.0\IQuiriumBackendProjectTest.csproj.AssemblyReference.cache
+C:\Users\ing_a\source\repos\IQuiriumBackendProject\IQuiriumBackendProjectTest\obj\Debug\net8.0\IQuiriumBackendProjectTest.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ing_a\source\repos\IQuiriumBackendProject\IQuiriumBackendProjectTest\obj\Debug\net8.0\IQuiriumBackendProjectTest.AssemblyInfoInputs.cache
+C:\Users\ing_a\source\repos\IQuiriumBackendProject\IQuiriumBackendProjectTest\obj\Debug\net8.0\IQuiriumBackendProjectTest.AssemblyInfo.cs
+C:\Users\ing_a\source\repos\IQuiriumBackendProject\IQuiriumBackendProjectTest\obj\Debug\net8.0\IQuiriumBackendProjectTest.csproj.CoreCompileInputs.cache
