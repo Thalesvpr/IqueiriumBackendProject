@@ -21,6 +21,7 @@ namespace IqueiriumBackendProject.Src.Api.Controllers.MemberFeedbacks
 
         /// <summary>
         /// Obtém todos os feedbacks recebidos por um membro específico.
+        /// 
         /// </summary>
         /// <param name="recipientId">ID do membro que recebeu os feedbacks.</param>
         /// <returns>
