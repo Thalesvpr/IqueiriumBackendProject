@@ -31,8 +31,8 @@ namespace IqueiriumBackendProject.Src.Infrastructure.Data
         public DbSet<ProductFeedbackAnalysis> ProductFeedbackAnalyses { get; set; }
         public DbSet<ProductMetrics> ProductMetrics { get; set; }
         public DbSet<UserRole> UserRoles { get; set; }
-        public DbSet<MemberFeedback> MemberFeedbacks { get; set; }
-        public DbSet<MemberFeedbackReport> MemberFeedbackReports { get; set; }
+       // public DbSet<MemberFeedback> MemberFeedbacks { get; set; }
+       // public DbSet<MemberFeedbackReport> MemberFeedbackReports { get; set; }
 
         /// <summary>
         /// Método para configurar o modelo de dados e relacionamentos.
@@ -49,7 +49,7 @@ namespace IqueiriumBackendProject.Src.Infrastructure.Data
                 .HasForeignKey(u => u.UserRoleId);
 
             // Configuração do relacionamento entre MemberFeedback e User (Sender e Recipient)
-            modelBuilder.Entity<MemberFeedback>()
+           /* modelBuilder.Entity<MemberFeedback>()
                 .HasOne(f => f.Sender)
                 .WithMany()
                 .HasForeignKey(f => f.SenderId)
@@ -87,7 +87,7 @@ namespace IqueiriumBackendProject.Src.Infrastructure.Data
                 new User { Id = 1, Name = "Manager A", Email = "usera@example.com", Password = "password123", UserRoleId = 3 }, // User normal
                 new User { Id = 2, Name = "User B", Email = "userb@example.com", Password = "password123", UserRoleId = 2 }, // Outro user normal
                 new User { Id = 3, Name = "Admin User", Email = "admin@example.com", Password = "admin123", UserRoleId = 1 } // Admin
-            );
+            );*/
         }
     }
 }
