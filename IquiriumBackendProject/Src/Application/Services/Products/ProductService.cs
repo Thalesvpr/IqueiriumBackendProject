@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore; // Importa o Entity Framework Core para man
 using IqueiriumBackendProject.Src.Domain.Entities.ProductEntities; // Importa a entidade de produto
 using IqueiriumBackendProject.Src.Application.Dtos.Products; // Importa o DTO relacionado a produtos
 
+
 namespace IqueiriumBackendProject.Src.Application.Services.Products
 {
     public class ProductService // Define a classe de serviço de produtos
@@ -31,7 +32,7 @@ namespace IqueiriumBackendProject.Src.Application.Services.Products
         /// <returns>
         /// O objeto <see cref="Product"/> criado, contendo os dados do novo produto após ser salvo no banco de dados.
         /// </returns>
-        public async Task<Product> AddProductAsync(CreateProductDto productDto)
+        public async Task<Product> AddProductAsync(ProductCreateDto productDto)
         {
             // Cria um novo objeto de produto com o nome definido no DTO
             var product = new Product
@@ -56,9 +57,9 @@ namespace IqueiriumBackendProject.Src.Application.Services.Products
         /// O ID do produto a ser recuperado.
         /// </param>
         /// <returns>
-        /// O objeto <see cref="Product"/> correspondente ao ID fornecido, ou <c>null</c> caso o produto não seja encontrado.
+        /// O objeto <see cref="/Product"/> correspondente ao ID fornecido, ou <c>null</c> caso o produto não seja encontrado.
         /// </returns>
-        public async Task<Product> GetProductByIdAsync(int id)
+        public async Task<Product?> GetProductByIdAsync(int id)
         {
             // Busca o produto no banco de dados usando o ID fornecido
             var product = await _context.Products.FindAsync(id);
@@ -71,7 +72,7 @@ namespace IqueiriumBackendProject.Src.Application.Services.Products
         /// Recupera todos os produtos armazenados no banco de dados.
         /// </summary>
         /// <returns>
-        /// Uma coleção de objetos <see cref="Product"/> representando todos os produtos encontrados no banco de dados.
+        /// Uma coleção de objetos <see //cref="Product"/> representando todos os produtos encontrados no banco de dados.
         /// </returns>
         public async Task<IEnumerable<Product>> GetAllProductsAsync()
         {
