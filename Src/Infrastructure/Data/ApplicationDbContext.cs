@@ -5,7 +5,7 @@ using IqueiriumBackendProject.Src.Domain.Entities.UserEntities;
 using IqueiriumBackendProject.Src.Domain.Entities;
 using IqueiriumBackendProject.Src.Domain.Enums;
 using Microsoft.EntityFrameworkCore;
-using IqueiriumBackendProject.Src.Domain.Entities.MemberFeedback;
+using IqueiriumBackendProject.Src.Domain.Entities.MemberFeedbackEntities;
 
 namespace IqueiriumBackendProject.Src.Infrastructure.Data
 {

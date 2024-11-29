@@ -1,35 +1,36 @@
 ﻿using System;
-using System.Linq;
 using System.Threading.Tasks;
-using IqueiriumBackendProject.Src.Application.Dtos.Users;
+using IqueiriumBackendProject.Src.Infrastructure.Data;
 using IqueiriumBackendProject.Src.Domain.Entities.UserEntities;
-using IqueiriumBackendProject.Src.Infrastructure.Persistence.Repository.Users;
 using IqueiriumBackendProject.Src.Domain.Enums;
+using Microsoft.EntityFrameworkCore;
 
 namespace IqueiriumBackendProject.Src.Application.Services.Users
 {
     public class UserService
     {
-        private readonly UserRepository _userRepository;
-        private readonly UserRoleRepository _userRoleRepository;
+        private readonly ApplicationDbContext _context;
 
-
-        public UserService(UserRepository userRepository, UserRoleRepository userRoleRepository)
+        public UserService(ApplicationDbContext context)
         {
-            _userRepository = userRepository;
-            _userRoleRepository = userRoleRepository;
+            _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
         /// <summary>
-        /// Registra um novo usuário com base nas informações fornecidas no DTO.
+        /// Registra um novo usuário com base nas informações fornecidas.
         /// </summary>
-        /// <param name="userDto">DTO contendo as informações do usuário a ser registrado.</param>
-        /// <returns>Um UserResponseDto com as informações do usuário registrado.</returns>
+        /// <param name="name">Nome do usuário.</param>
+        /// <param name="email">Email do usuário.</param>
+        /// <param name="password">Senha do usuário.</param>
+        /// <returns>O usuário registrado.</returns>
         /// <exception cref="InvalidOperationException">Lançado se o email já estiver em uso.</exception>
-        public async Task<UserResponseDto> RegisterUser(UserCreateDto userDto)
+        public async Task<User> RegisterUserAsync(string name, string email, string password)
         {
             // Verifica se o email já está registrado
-            var existingUser = await _userRepository.FindByEmailAsync(userDto.Email);
+            var existingUser = await _context.Users
+                .AsNoTracking()
+                .FirstOrDefaultAsync(u => u.Email == email);
+
             if (existingUser != null)
             {
                 throw new InvalidOperationException("O email já está em uso.");
@@ -39,55 +40,74 @@ namespace IqueiriumBackendProject.Src.Application.Services.Users
             var roleType = UserRoleType.User;
 
             // Busca a role no banco de dados com base no UserRoleType
-            var role = await _userRoleRepository.GetRoleByTypeAsync(roleType);
+            var role = await _context.UserRoles
+                .AsNoTracking()
+                .FirstOrDefaultAsync(r => r.Type == roleType);
 
             if (role == null)
             {
                 throw new InvalidOperationException("Role não encontrada.");
             }
 
-            // Cria a entidade de usuário a partir do DTO
+            // Cria a entidade de usuário
             var user = new User
             {
-                Name = userDto.Name,
-                Email = userDto.Email,
-                Password = userDto.Password, // Em produção, utilize hashing seguro de senha
-                UserRoleId = role.Id // Atribui a role correta ao usuário
+                Name = name,
+                Email = email,
+                Password = password, // Em produção, utilize hashing seguro de senha
+                UserRoleId = role.Id
             };
 
-            await _userRepository.AddAsync(user);
+            _context.Users.Add(user);
+            await _context.SaveChangesAsync();
 
-            // Retorna o UserResponseDto com os dados do usuário registrado
-            return new UserResponseDto
-            {
-                Id = user.Id,
-                Name = user.Name,
-                Email = user.Email,
-                RoleType = role.Type
-            };
+            return user;
         }
 
         /// <summary>
-        /// Recupera um usuário com base no email fornecido.
+        /// Recupera um usuário completo pelo email, incluindo informações sensíveis como senha.
         /// </summary>
-        /// <param name="email">Email do usuário a ser recuperado.</param>
-        /// <returns>Um UserResponseDto com as informações do usuário, ou null se o usuário não for encontrado.</returns>
-        public async Task<UserResponseDto> GetUserByEmailAsync(string email)
+        /// <param name="email">Email do usuário.</param>
+        /// <returns>O usuário correspondente ou null se não encontrado.</returns>
+        public async Task<User> GetUserByEmailForAuthAsync(string email)
         {
-            var user = await _userRepository.FindByEmailAsync(email);
+            return await _context.Users
+                .Include(u => u.Role)
+                .FirstOrDefaultAsync(u => u.Email == email);
+        }
+
+        /// <summary>
+        /// Recupera um usuário pelo ID.
+        /// </summary>
+        /// <param name="id">ID do usuário.</param>
+        /// <returns>O usuário correspondente ou null se não encontrado.</returns>
+        public async Task<User> GetUserByIdAsync(int id)
+        {
+            return await _context.Users
+                .Include(u => u.Role)
+                .FirstOrDefaultAsync(u => u.Id == id);
+        }
+
+        /// <summary>
+        /// Atualiza a senha de um usuário.
+        /// </summary>
+        /// <param name="id">ID do usuário.</param>
+        /// <param name="newPassword">Nova senha do usuário.</param>
+        /// <returns>True se a atualização foi bem-sucedida, caso contrário, false.</returns>
+        public async Task<bool> UpdatePasswordAsync(int id, string newPassword)
+        {
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Id == id);
 
             if (user == null)
             {
-                return null;
+                return false;
             }
 
-            return new UserResponseDto
-            {
-                Id = user.Id,
-                Name = user.Name,
-                Email = user.Email,
-                RoleType = user.Role.Type
-            };
+            user.Password = newPassword; // Em produção, utilize hashing seguro de senha
+            _context.Users.Update(user);
+            await _context.SaveChangesAsync();
+
+            return true;
         }
     }
 }
