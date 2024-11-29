@@ -9,7 +9,7 @@ bin/
 obj/
 out/
 
-# Arquivos de configuração e ambientes locais
+# Arquivos de configuraï¿½ï¿½o e ambientes locais
 appsettings*.json
 !appsettings.json # Exceto o appsettings.json principal
 .env
@@ -24,9 +24,10 @@ appsettings*.json
 *.userosscache
 *.sln.docstates
 *.vsidx
+.vs
 
 
-# Arquivos temporários e de backup
+# Arquivos temporï¿½rios e de backup
 *.tmp
 *.temp
 *.bak
@@ -35,7 +36,7 @@ appsettings*.json
 *.ncrunch*
 ~$*
 
-# Configuração de pacotes
+# Configuraï¿½ï¿½o de pacotes
 **/packages/
 **/nuget.exe
 *.nupkg
@@ -54,6 +55,6 @@ postgres_data/
 .idea/
 *.sln.iml
 
-# Arquivos específicos do sistema
+# Arquivos especï¿½ficos do sistema
 *.DS_Store
 Thumbs.db
