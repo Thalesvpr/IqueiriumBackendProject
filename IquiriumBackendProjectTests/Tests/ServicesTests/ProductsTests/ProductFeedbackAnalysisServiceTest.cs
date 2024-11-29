@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Linq;
 using IqueiriumBackendProject.Src.Domain.Entities.ProductEntities;
 
-namespace IqueiriumBackendProject.Tests.ServicesTests.ProductsTests
+namespace IquiriumBackendProject.Tests.ServicesTests.ProductsTests
 {
     public class ProductFeedbackAnalysisServiceTest
     {

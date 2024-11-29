@@ -11,7 +11,7 @@ using System.Net;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace IqueiriumBackendProject.Tests.ServicesTests.ProductsTests
+namespace IquiriumBackendProject.Tests.ServicesTests.ProductsTests
 {
     public class ProductFeedbackServiceTest
     {
