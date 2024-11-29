@@ -9,7 +9,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
 
-namespace IqueiriumBackendProject.Tests.ServicesTests.ProductsTests
+namespace IquiriumBackendProject.Tests.ServicesTests.ProductsTests
 {
     public class ProductServiceTest
     {

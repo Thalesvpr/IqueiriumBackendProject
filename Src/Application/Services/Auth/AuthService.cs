@@ -4,7 +4,7 @@ using IqueiriumBackendProject.Src.Infrastructure.Auth;
 using IqueiriumBackendProject.Src.Infrastructure.Persistence.Repository.Users;
 using System.Threading.Tasks;
 
-namespace IqueiriumBackendProject.Src.Application.Services.Auth
+namespace IqueiriumBackendProjectTests.Services.Auth
 {
     public class AuthService
     {
