@@ -1,10 +1,10 @@
 using IqueiriumBackendProject.Src.Application.Services.Auth;
-using IqueiriumBackendProject.Src.Application.Services.Member;
 using IqueiriumBackendProject.Src.Application.Services.Products;
 using IqueiriumBackendProject.Src.Application.Services.Users;
 using IqueiriumBackendProject.Src.Infrastructure.Auth;
 using IqueiriumBackendProject.Src.Infrastructure.Data;
-
+using IqueiriumBackendProject.Src.Infrastructure.Persistence.Repository.Products;
+using IqueiriumBackendProject.Src.Infrastructure.Persistence.Repository.Users;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -29,9 +29,12 @@ builder.Services.AddScoped<UserService>();
 builder.Services.AddScoped<ProductService>();
 builder.Services.AddScoped<ProductFeedbackService>();
 builder.Services.AddScoped<ProductFeedbackAnalysisService>();
-builder.Services.AddScoped<MemberFeedbackService>();
 
-
+builder.Services.AddScoped<ProductFeedbackRepository>();
+builder.Services.AddScoped<ProductRepository>();
+builder.Services.AddScoped<UserRepository>();
+builder.Services.AddScoped<UserRoleRepository>();
+builder.Services.AddScoped<ProductFeedbackAnalysisRepository>();
 
 
 builder.Services.AddAuthentication(options =>

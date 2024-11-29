@@ -1,7 +1,7 @@
 ﻿using IqueiriumBackendProject.Src.Domain.Entities.UserEntities;
 using IqueiriumBackendProject.Src.Domain.Enums;
 using IqueiriumBackendProject.Src.Infrastructure.Auth;
-using IqueiriumBackendProject.Src.Application.Services.Users;
+using IqueiriumBackendProject.Src.Infrastructure.Persistence.Repository.Users;
 using System.Threading.Tasks;
 
 namespace IqueiriumBackendProject.Src.Application.Services.Auth
@@ -9,20 +9,23 @@ namespace IqueiriumBackendProject.Src.Application.Services.Auth
     public class AuthService
     {
         private readonly JwtService _jwtService;
-        private readonly UserService _userService;
+        private readonly UserRepository _userRepository;
 
-        public AuthService(JwtService jwtService, UserService userService)
+        public AuthService(JwtService jwtService, UserRepository userRepository)
         {
             _jwtService = jwtService;
-            _userService = userService;
+            _userRepository = userRepository;
         }
 
         /// <summary>
         /// Autentica um usuário com base no email e senha.
         /// </summary>
+        /// <param name="email">Email do usuário.</param>
+        /// <param name="password">Senha do usuário.</param>
+        /// <returns>Token JWT se a autenticação for bem-sucedida, caso contrário, null.</returns>
         public async Task<string?> AuthenticateAsync(string email, string password)
         {
-            var user = await _userService.GetUserByEmailForAuthAsync(email);
+            var user = await _userRepository.FindByEmailAsync(email);
 
             // Verifica se o usuário existe e se a senha é válida
             if (user == null || !VerifyPassword(user, password))
@@ -38,6 +41,9 @@ namespace IqueiriumBackendProject.Src.Application.Services.Auth
         /// <summary>
         /// Verifica se a senha fornecida corresponde ao hash armazenado.
         /// </summary>
+        /// <param name="user">Usuário a ser verificado.</param>
+        /// <param name="password">Senha fornecida.</param>
+        /// <returns>True se a senha for válida; caso contrário, false.</returns>
         private bool VerifyPassword(User user, string password)
         {
             // Aqui você deve substituir pela verificação de hash segura em produção

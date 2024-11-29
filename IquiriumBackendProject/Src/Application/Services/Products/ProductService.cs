@@ -32,7 +32,7 @@ namespace IqueiriumBackendProject.Src.Application.Services.Products
         /// <returns>
         /// O objeto <see cref="Product"/> criado, contendo os dados do novo produto após ser salvo no banco de dados.
         /// </returns>
-        public async Task<Product> AddProductAsync(ProductCreateDto productDto)
+        public async Task<Product> AddProductAsync(CreateProductDto productDto)
         {
             // Cria um novo objeto de produto com o nome definido no DTO
             var product = new Product

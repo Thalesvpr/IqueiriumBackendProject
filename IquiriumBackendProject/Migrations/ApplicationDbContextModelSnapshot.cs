@@ -22,92 +22,6 @@ namespace IqueiriumBackendProject.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("IqueiriumBackendProject.Src.Domain.Entities.MemberFeedbackEntities.MemberFeedback", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasColumnName("id");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Content")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("created_date");
-
-                    b.Property<string>("FeedbackType")
-                        .IsRequired()
-                        .HasColumnType("varchar(50)");
-
-                    b.Property<int>("RecipientId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("SenderId")
-                        .HasColumnType("integer");
-
-                    b.Property<DateTime>("SentAt")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("updated_date");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("RecipientId");
-
-                    b.HasIndex("SenderId");
-
-                    b.ToTable("MemberFeedbacks");
-                });
-
-            modelBuilder.Entity("IqueiriumBackendProject.Src.Domain.Entities.MemberFeedbackEntities.MemberFeedbackReport", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasColumnName("id");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("created_date");
-
-                    b.Property<int>("MemberFeedbackId")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("Reason")
-                        .IsRequired()
-                        .HasColumnType("varchar(100)");
-
-                    b.Property<DateTime>("ReportedAt")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<int>("ReporterId")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("timestamp with time zone")
-                        .HasColumnName("updated_date");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("MemberFeedbackId");
-
-                    b.HasIndex("ReporterId");
-
-                    b.ToTable("MemberFeedbackReports");
-                });
-
             modelBuilder.Entity("IqueiriumBackendProject.Src.Domain.Entities.ProductEntities.Product", b =>
                 {
                     b.Property<int>("Id")
@@ -133,6 +47,20 @@ namespace IqueiriumBackendProject.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Products");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedDate = new DateTime(2024, 11, 7, 3, 46, 54, 902, DateTimeKind.Utc).AddTicks(8532),
+                            Name = "Produto A"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedDate = new DateTime(2024, 11, 7, 3, 46, 54, 902, DateTimeKind.Utc).AddTicks(8536),
+                            Name = "Produto B"
+                        });
                 });
 
             modelBuilder.Entity("IqueiriumBackendProject.Src.Domain.Entities.ProductEntities.ProductFeedback", b =>
@@ -213,8 +141,7 @@ namespace IqueiriumBackendProject.Migrations
 
                     b.HasIndex("AnalystUserId");
 
-                    b.HasIndex("ProductFeedbackId")
-                        .IsUnique();
+                    b.HasIndex("ProductFeedbackId");
 
                     b.ToTable("ProductFeedbackAnalyses");
                 });
@@ -288,12 +215,7 @@ namespace IqueiriumBackendProject.Migrations
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("updated_date");
 
-                    b.Property<int>("UserRoleId")
-                        .HasColumnType("integer");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("UserRoleId");
 
                     b.ToTable("Users");
 
@@ -301,29 +223,18 @@ namespace IqueiriumBackendProject.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2024, 11, 29, 1, 36, 33, 520, DateTimeKind.Utc).AddTicks(2968),
+                            CreatedDate = new DateTime(2024, 11, 7, 3, 46, 54, 902, DateTimeKind.Utc).AddTicks(8283),
                             Email = "usera@example.com",
-                            Name = "Manager A",
-                            Password = "password123",
-                            UserRoleId = 3
+                            Name = "User A",
+                            Password = "password123"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2024, 11, 29, 1, 36, 33, 520, DateTimeKind.Utc).AddTicks(2976),
+                            CreatedDate = new DateTime(2024, 11, 7, 3, 46, 54, 902, DateTimeKind.Utc).AddTicks(8294),
                             Email = "userb@example.com",
                             Name = "User B",
-                            Password = "password123",
-                            UserRoleId = 2
-                        },
-                        new
-                        {
-                            Id = 3,
-                            CreatedDate = new DateTime(2024, 11, 29, 1, 36, 33, 520, DateTimeKind.Utc).AddTicks(2982),
-                            Email = "admin@example.com",
-                            Name = "Admin User",
-                            Password = "admin123",
-                            UserRoleId = 1
+                            Password = "password123"
                         });
                 });
 
@@ -340,74 +251,19 @@ namespace IqueiriumBackendProject.Migrations
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("created_date");
 
-                    b.Property<int>("Type")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("updated_date");
 
+                    b.Property<int>("UserId")
+                        .HasColumnType("integer")
+                        .HasColumnName("user_id");
+
                     b.HasKey("Id");
 
-                    b.ToTable("UserRoles");
+                    b.HasIndex("UserId");
 
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CreatedDate = new DateTime(2024, 11, 29, 1, 36, 33, 520, DateTimeKind.Utc).AddTicks(1390),
-                            Type = 0
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CreatedDate = new DateTime(2024, 11, 29, 1, 36, 33, 520, DateTimeKind.Utc).AddTicks(1408),
-                            Type = 1
-                        },
-                        new
-                        {
-                            Id = 3,
-                            CreatedDate = new DateTime(2024, 11, 29, 1, 36, 33, 520, DateTimeKind.Utc).AddTicks(1412),
-                            Type = 2
-                        });
-                });
-
-            modelBuilder.Entity("IqueiriumBackendProject.Src.Domain.Entities.MemberFeedbackEntities.MemberFeedback", b =>
-                {
-                    b.HasOne("IqueiriumBackendProject.Src.Domain.Entities.UserEntities.User", "Recipient")
-                        .WithMany()
-                        .HasForeignKey("RecipientId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("IqueiriumBackendProject.Src.Domain.Entities.UserEntities.User", "Sender")
-                        .WithMany()
-                        .HasForeignKey("SenderId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Recipient");
-
-                    b.Navigation("Sender");
-                });
-
-            modelBuilder.Entity("IqueiriumBackendProject.Src.Domain.Entities.MemberFeedbackEntities.MemberFeedbackReport", b =>
-                {
-                    b.HasOne("IqueiriumBackendProject.Src.Domain.Entities.MemberFeedbackEntities.MemberFeedback", "MemberFeedback")
-                        .WithMany()
-                        .HasForeignKey("MemberFeedbackId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("IqueiriumBackendProject.Src.Domain.Entities.UserEntities.User", "Reporter")
-                        .WithMany()
-                        .HasForeignKey("ReporterId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("MemberFeedback");
-
-                    b.Navigation("Reporter");
+                    b.ToTable("UserRole");
                 });
 
             modelBuilder.Entity("IqueiriumBackendProject.Src.Domain.Entities.ProductEntities.ProductFeedback", b =>
@@ -420,7 +276,8 @@ namespace IqueiriumBackendProject.Migrations
 
                     b.HasOne("IqueiriumBackendProject.Src.Domain.Entities.UserEntities.User", "User")
                         .WithMany("ProductFeedbacks")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("Product");
 
@@ -429,21 +286,21 @@ namespace IqueiriumBackendProject.Migrations
 
             modelBuilder.Entity("IqueiriumBackendProject.Src.Domain.Entities.ProductEntities.ProductFeedbackAnalysis", b =>
                 {
-                    b.HasOne("IqueiriumBackendProject.Src.Domain.Entities.UserEntities.User", "AnalystUser")
+                    b.HasOne("IqueiriumBackendProject.Src.Domain.Entities.UserEntities.User", "User")
                         .WithMany("ProductFeedbackAnalyses")
                         .HasForeignKey("AnalystUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("IqueiriumBackendProject.Src.Domain.Entities.ProductEntities.ProductFeedback", "ProductFeedback")
-                        .WithOne("FeedbackAnalysis")
-                        .HasForeignKey("IqueiriumBackendProject.Src.Domain.Entities.ProductEntities.ProductFeedbackAnalysis", "ProductFeedbackId")
+                        .WithMany("FeedbackAnalyses")
+                        .HasForeignKey("ProductFeedbackId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("AnalystUser");
-
                     b.Navigation("ProductFeedback");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("IqueiriumBackendProject.Src.Domain.Entities.ProductEntities.ProductMetrics", b =>
@@ -457,15 +314,15 @@ namespace IqueiriumBackendProject.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("IqueiriumBackendProject.Src.Domain.Entities.UserEntities.User", b =>
+            modelBuilder.Entity("IqueiriumBackendProject.Src.Domain.Entities.UserEntities.UserRole", b =>
                 {
-                    b.HasOne("IqueiriumBackendProject.Src.Domain.Entities.UserEntities.UserRole", "Role")
-                        .WithMany()
-                        .HasForeignKey("UserRoleId")
+                    b.HasOne("IqueiriumBackendProject.Src.Domain.Entities.UserEntities.User", "User")
+                        .WithMany("UserRoles")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Role");
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("IqueiriumBackendProject.Src.Domain.Entities.ProductEntities.Product", b =>
@@ -477,8 +334,7 @@ namespace IqueiriumBackendProject.Migrations
 
             modelBuilder.Entity("IqueiriumBackendProject.Src.Domain.Entities.ProductEntities.ProductFeedback", b =>
                 {
-                    b.Navigation("FeedbackAnalysis")
-                        .IsRequired();
+                    b.Navigation("FeedbackAnalyses");
                 });
 
             modelBuilder.Entity("IqueiriumBackendProject.Src.Domain.Entities.UserEntities.User", b =>
@@ -486,6 +342,8 @@ namespace IqueiriumBackendProject.Migrations
                     b.Navigation("ProductFeedbackAnalyses");
 
                     b.Navigation("ProductFeedbacks");
+
+                    b.Navigation("UserRoles");
                 });
 #pragma warning restore 612, 618
         }
